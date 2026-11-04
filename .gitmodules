@@ -1,0 +1,3 @@
+[submodule "deps/synthCore"]
+	path = deps/synthCore
+	url = git@github.com:EclipseLunaria/synthCore.git
