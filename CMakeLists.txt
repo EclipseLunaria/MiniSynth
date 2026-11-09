@@ -7,21 +7,22 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(miniSynthSources
     src/main.cpp
+    src/window.cpp
+    src/event.cpp
 )
 
-include(FetchContent)
+find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3-shared)
 
-FetchContent_Declare(
-    synthCore
-    URL https://github.com/EclipseLunaria/synthCore
-)
+add_subdirectory(deps/synthCore)
 
-FetchContent_MakeAvailable(synthCore)
+add_executable(main ${miniSynthSources}
+    src/window.cpp)
 
-add_executable(main ${miniSynthSources})
+target_include_directories(main PUBLIC include)
 
 target_link_libraries(
     main
     PRIVATE
     synthCore
+    SDL3::SDL3-shared
 )
