@@ -33,6 +33,7 @@ MiniSynth::Window::Window(int width, int height, const char * title)
     m_window_id = static_cast<int>(SDL_GetWindowID(windows_impl[m_window_index]));
     if (m_window_id == 0) throw "Invalid window id.";
 
+    windows[m_window_index] = this;
     //Initialize Renderers
     renderers[m_window_index] = SDL_CreateRenderer(windows_impl[m_window_index], nullptr);
 
@@ -45,13 +46,17 @@ MiniSynth::Window::~Window()
     SDL_DestroyRenderer(renderers[m_window_index]);
     SDL_DestroyWindow(windows_impl[m_window_index]);
     windows_impl[m_window_index] = nullptr;
+    windows[m_window_index] = nullptr;
     SDL_Log("Destroying window %d.\n", m_window_index);
 }
 
 MiniSynth::Window *MiniSynth::Window::find_window(int window_id)
 {
     for (int i = 0; i < MAX_WINDOWS; ++i){
-        if ()
+        if (windows[i]->m_window_id == window_id) 
+        {
+            return windows[i];
+        }
     }
     return nullptr;
 }

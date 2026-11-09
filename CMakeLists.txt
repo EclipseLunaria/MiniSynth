@@ -8,15 +8,13 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(miniSynthSources
     src/main.cpp
     src/window.cpp
-    src/event.cpp
 )
 
 find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3-shared)
 
 add_subdirectory(deps/synthCore)
 
-add_executable(main ${miniSynthSources}
-    src/window.cpp)
+add_executable(main ${miniSynthSources})
 
 target_include_directories(main PUBLIC include)
 
